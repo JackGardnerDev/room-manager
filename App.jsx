@@ -22,10 +22,22 @@ function App() {
     localStorage.setItem('furnitureData', JSON.stringify(furniture));
   }, [width, length, zoom, furniture]);
 
+  // const addFurniture = () => {
+  //   const newFurniture = { id: Date.now(), name: '', length: '', width: '', x: 0, y: 0 };  // Added x, y default positions
+  //   setFurniture([...furniture, newFurniture]);
+  // };
+
   const addFurniture = () => {
-    const newFurniture = { id: Date.now(), name: '', length: '', width: '', x: 0, y: 0 };  // Added x, y default positions
+    const newFurniture = { 
+        id: Date.now(), 
+        name: '', 
+        length: '', 
+        width: '', 
+        x: '0', 
+        y: '0' 
+    };
     setFurniture([...furniture, newFurniture]);
-  };
+  };  
 
   const updateFurniture = (id, field, value) => {
     setFurniture(furniture.map(item => item.id === id ? { ...item, [field]: value } : item));
@@ -53,9 +65,9 @@ function App() {
               id="width"
               type="number"
               value={width}
-              onChange={e => setWidth(Math.min(e.target.value, 1750))}
+              onChange={e => setWidth(Math.min(e.target.value, 2000))}
               placeholder="Width"
-              max="1500"
+              max="2000"
             />
           </div>
           <div className="input-wrapper">
@@ -64,16 +76,16 @@ function App() {
               id="length"
               type="number"
               value={length}
-              onChange={e => setLength(Math.min(e.target.value, 1750))}
+              onChange={e => setLength(Math.min(e.target.value, 2000))}
               placeholder="Length"
-              max="1500"
+              max="2000"
             />
           </div>
         </div>
 
         <h3>Furniture</h3>
 
-          <button onClick={addFurniture}>+</button>
+          {/* <button onClick={addFurniture}>+</button> */}
           
           {furniture.map(item => (
             <div key={item.id} className="furniture-section">
@@ -91,54 +103,62 @@ function App() {
               </div>
               
               <div className="dimension-input-group">
-                <div className="input-wrapper">
-                  <label htmlFor={`length-${item.id}`}>Length (cm):</label>
-                  <input 
-                    id={`length-${item.id}`}
-                    type="number"
-                    placeholder="Length"
-                    value={item.length}
-                    onChange={(e) => updateFurniture(item.id, 'length', e.target.value)}
-                  />
+              <div className="input-wrapper">
+                    <label htmlFor={`length-${item.id}`}>Length (cm):</label>
+                    <input 
+                        id={`length-${item.id}`}
+                        type="number"
+                        placeholder="Length"
+                        value={item.length}
+                        onChange={(e) => updateFurniture(item.id, 'length', Math.min(e.target.value, 2000))}
+                        max="2000"
+                    />
                 </div>
+
                 <div className="input-wrapper">
-                  <label htmlFor={`width-${item.id}`}>Width (cm):</label>
-                  <input 
-                    id={`width-${item.id}`}
-                    type="number"
-                    placeholder="Width"
-                    value={item.width}
-                    onChange={(e) => updateFurniture(item.id, 'width', e.target.value)}
-                  />
+                    <label htmlFor={`width-${item.id}`}>Width (cm):</label>
+                    <input 
+                        id={`width-${item.id}`}
+                        type="number"
+                        placeholder="Width"
+                        value={item.width}
+                        onChange={(e) => updateFurniture(item.id, 'width', Math.min(e.target.value, 2000))}
+                        max="2000"
+                    />
                 </div>
               </div>
 
               {/* New position input fields */}
               <div className="position-input-group">
-                <div className="input-wrapper">
-                  <label htmlFor={`x-${item.id}`}>X Position (px):</label>
-                  <input 
-                    id={`x-${item.id}`}
-                    type="number"
-                    placeholder="X"
-                    value={item.x}
-                    onChange={(e) => updateFurniture(item.id, 'x', e.target.value)}
-                  />
+              <div className="input-wrapper">
+                    <label htmlFor={`x-${item.id}`}>X Position:</label>
+                    <input 
+                        id={`x-${item.id}`}
+                        type="number"
+                        placeholder="X"
+                        value={item.x}
+                        onChange={(e) => updateFurniture(item.id, 'x', Math.min(e.target.value, 1000))}
+                        max="1000"
+                    />
                 </div>
+
                 <div className="input-wrapper">
-                  <label htmlFor={`y-${item.id}`}>Y Position (px):</label>
-                  <input 
-                    id={`y-${item.id}`}
-                    type="number"
-                    placeholder="Y"
-                    value={item.y}
-                    onChange={(e) => updateFurniture(item.id, 'y', e.target.value)}
-                  />
+                    <label htmlFor={`y-${item.id}`}>Y Position:</label>
+                    <input 
+                        id={`y-${item.id}`}
+                        type="number"
+                        placeholder="Y"
+                        value={item.y}
+                        onChange={(e) => updateFurniture(item.id, 'y', Math.min(e.target.value, 1000))}
+                        max="1000"
+                    />
                 </div>
               </div>
 
             </div>
           ))}
+
+          <button onClick={addFurniture}>+</button>
 
       </div>
         
@@ -168,8 +188,8 @@ function App() {
                   height: `${item.width}px`,
                   border: '1px solid red',
                   position: 'absolute',
-                  top: `${item.y}px`,
-                  left: `${item.x}px`,
+                  top: `${item.y}px`,       // Use the y value for positioning
+                  left: `${item.x}px`,     // Use the x value for positioning
                 }}
               >
                 <div className="furniture-length-label">{item.name} - {item.length} cm</div> 
