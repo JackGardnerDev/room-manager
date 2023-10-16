@@ -1,41 +1,43 @@
-/* Reset styles for body and html to remove margins and padding */
+/* Reset styles */
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden; /* This ensures that the body and html elements do not scroll */
+  overflow: hidden; /* Prevents body and html from scrolling */
 }
 
-/* Main container layout */
+/* Main Layout */
 .app {
-  display: flex; /* Uses flexbox to split the view into two sections: control and rectangle */
+  display: flex; 
   height: 100vh;
   width: 100vw;
 }
 
-/* Left side: control section */
+/* Control Section - Left side */
 .control-section {
-  flex: 1; /* Takes up 1 fraction of the available space (1 out of 4) */
+  flex: 1; 
   padding: 20px;
-  border-right: 1px solid #ccc; /* Provides a visual separator */
-  overflow-y: auto; /* In case the controls get too many and need scrolling */
+  border-right: 1px solid #ccc; 
+  overflow-y: auto; /* Enables scrolling if controls overflow */
 }
 
-/* Title at the top-left of the screen */
-.title-section {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 20px;
-  z-index: 2; /* Places the title above other elements */
-}
-
-/* Styling for the input boxes and their container */
+/* Input Styles */
 .input-section {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  width: 200px; 
+}
+
+label {
+  margin-bottom: 5px;
 }
 
 input {
@@ -43,51 +45,33 @@ input {
   font-size: 16px;
 }
 
-.input-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+/* Furniture Entries */
 .furniture-section {
-  margin-bottom: 15px; /* Spacing between different furniture entries */
+  margin-bottom: 15px; 
 }
 
-.name-input-group {
+.name-input-group,
+.dimension-input-group {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-/* .dimension-input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-} */
-
-.dimension-input-group {
-  display: flex; 
-  gap: 10px; /* adjust this gap for spacing between the inputs */
 }
 
 .remove-button {
-  /* width: 30px;
-  height: 30px; */
   font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Right side: rectangle display section */
+/* Rectangle Display Section - Right side */
 .rectangle-section {
-  flex: 3; /* Takes up the remaining space */
-  overflow: auto; /* Allows for scrolling and zooming of the rectangle */
+  flex: 3; 
+  overflow: auto; 
   position: relative;
-  background-color: #242424; /* Gives a light gray background for contrast */
+  background-color: #242424; 
 }
 
-/* Centered container for the rectangle */
 .rectangle-display {
   position: absolute;
   top: 50%;
@@ -95,14 +79,6 @@ input {
   transform: translate(-50%, -50%);
 }
 
-/* Styling for rectangle's width and height labels */
-/* Styling for rectangle's width and height labels */
-.length-label, .width-label {
-  font-size: 16px;
-  margin: 10px;
-}
-
-/* Rectangle visual representation */
 .rectangle {
   display: flex;
   align-items: center;
@@ -110,41 +86,58 @@ input {
   border: 1px solid black;
 }
 
-/* Rotates and positions the width label to the side of the rectangle */
+/* Room Labels */
+.length-label,
 .width-label {
-  position: absolute;
-  top: 40%;
-  left: calc(100% + 10px); /* Moves the label to the right side of the rectangle, with a 10px gap */
-  transform: translateY(-50%) rotate(90deg);
-  transform-origin: left center; /* Pivot point for rotation */
+  font-size: 16px;
+  margin: 10px;
   white-space: nowrap;
 }
 
-/* Positions the length label above the rectangle */
+.width-label {
+  position: absolute;
+  top: 40%;
+  left: calc(100% + 10px); 
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: left center;
+}
+
 .length-label {
   position: absolute;
   top: -50px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/* Furniture Rectangles and Labels */
+.furniture-rectangle {
+  background-color: rgba(146, 113, 168, 0.3);
+}
+
+.furniture-width-label,
+.furniture-length-label {
+  position: absolute;
   white-space: nowrap;
+  font-size: 12px;
 }
 
-/* Styling for input and label grouping */
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  width: 200px; /* Example width, adjust as needed */
+.furniture-width-label {
+  top: 50%;
+  right: -45px;
+  transform: translateY(-50%) rotate(90deg);
 }
 
-label {
-  margin-bottom: 5px;
+.furniture-length-label {
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
+/* Miscellaneous Styles */
 button {
-  margin: 5px; /* Adjust the value as per your requirements */
+  margin: 5px; 
 }
 
 .standard-input {
-  width: 200px; /* Example width, adjust as needed */
+  width: 200px;
 }
